@@ -1,0 +1,338 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JS Concurrency Visulaizer</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js"></script>
+</head>
+
+<body>
+    <!-- <header class="selector">
+        <div><button>.all</button></div>
+        <div><button>.any</button></div>
+        <div><button>.race</button></div>
+        <div><button>.allSettled</button></div>
+    </header> -->
+    <main>
+        <div class="promise-all">
+            <form id="promiseForm">
+                <h4>Promise.all()</h4>
+                <div class="characters">
+                    <div class="character">
+                        <span>Hitesh</span>
+                        <div class="radio">
+                            <label>
+                  <input type="radio" name="hitesh" value="resolve"checked />Resolve
+                </label>
+                            <label>
+                  <input type="radio" name="hitesh" value="reject" />Reject
+                </label>
+                        </div>
+                        <p id="msgHitesh">Value:-</p>
+                    </div>
+
+                    <!-- Piyush -->
+                    <div class="character">
+                        <span>Piyush</span>
+
+                        <div class="radio">
+                            <label>
+                  <input type="radio" name="piyush" value="resolve" checked />
+                  Resolve
+                </label>
+
+                            <label>
+                  <input type="radio" name="piyush" value="reject" />
+                  Reject
+                </label>
+                        </div>
+
+                        <p id="msgPiyush">Value:-</p>
+                    </div>
+
+                    <!-- Anurod -->
+                    <div class="character">
+                        <span>Anurod</span>
+
+                        <div class="radio">
+                            <label>
+                  <input type="radio" name="anurod" value="resolve" checked/>
+                  Resolve
+                </label>
+
+                            <label>
+                  <input type="radio" name="anurod" value="reject" />
+                  Reject
+                </label>
+                        </div>
+
+                        <p id="msgAnurod">Value:-</p>
+                    </div>
+
+                    <!-- Akash -->
+                    <div class="character">
+                        <span>Akash</span>
+
+                        <div class="radio">
+                            <label>
+                  <input type="radio" name="akash" value="resolve" checked />
+                  Resolve
+                </label>
+
+                            <label>
+                  <input type="radio" name="akash" value="reject" />
+                  Reject
+                </label>
+                        </div>
+
+                        <p id="msgAkash">Value:-</p>
+                    </div>
+                </div>
+
+                <button type="button" id="submitBtn">Run Simulation</button>
+            </form>
+        </div>
+
+        <div class="promise-any">
+            <form id="promiseForm">
+                <h4>Promise.all()</h4>
+                <div class="characters">
+                    <div class="character">
+                        <span>Hitesh</span>
+                        <div class="radio">
+                            <label>
+                  <input type="radio" name="hitesh" value="resolve"checked />Resolve
+                </label>
+                            <label>
+                  <input type="radio" name="hitesh" value="reject" />Reject
+                </label>
+                        </div>
+                        <p id="msgHitesh">Value:-</p>
+                    </div>
+
+                    <!-- Piyush -->
+                    <div class="character">
+                        <span>Piyush</span>
+
+                        <div class="radio">
+                            <label>
+                  <input type="radio" name="piyush" value="resolve" checked />
+                  Resolve
+                </label>
+
+                            <label>
+                  <input type="radio" name="piyush" value="reject" />
+                  Reject
+                </label>
+                        </div>
+
+                        <p id="msgPiyush">Value:-</p>
+                    </div>
+
+                    <!-- Anurod -->
+                    <div class="character">
+                        <span>Anurod</span>
+
+                        <div class="radio">
+                            <label>
+                  <input type="radio" name="anurod" value="resolve" checked/>
+                  Resolve
+                </label>
+
+                            <label>
+                  <input type="radio" name="anurod" value="reject" />
+                  Reject
+                </label>
+                        </div>
+
+                        <p id="msgAnurod">Value:-</p>
+                    </div>
+
+                    <!-- Akash -->
+                    <div class="character">
+                        <span>Akash</span>
+
+                        <div class="radio">
+                            <label>
+                  <input type="radio" name="akash" value="resolve" checked />
+                  Resolve
+                </label>
+
+                            <label>
+                  <input type="radio" name="akash" value="reject" />
+                  Reject
+                </label>
+                        </div>
+
+                        <p id="msgAkash">Value:-</p>
+                    </div>
+                </div>
+
+                <button type="button" id="submitBtn">Run Simulation</button>
+            </form>
+        </div>
+
+        <div class="promise-race">
+            <form id="promiseForm">
+                <h4>Promise.all()</h4>
+                <div class="characters">
+                    <div class="character">
+                        <span>Hitesh</span>
+                        <div class="radio">
+                            <label>
+                  <input type="radio" name="hitesh" value="resolve"checked />Resolve
+                </label>
+                            <label>
+                  <input type="radio" name="hitesh" value="reject" />Reject
+                </label>
+                        </div>
+                        <p id="msgHitesh">Value:-</p>
+                    </div>
+
+                    <!-- Piyush -->
+                    <div class="character">
+                        <span>Piyush</span>
+
+                        <div class="radio">
+                            <label>
+                  <input type="radio" name="piyush" value="resolve" checked />
+                  Resolve
+                </label>
+
+                            <label>
+                  <input type="radio" name="piyush" value="reject" />
+                  Reject
+                </label>
+                        </div>
+
+                        <p id="msgPiyush">Value:-</p>
+                    </div>
+
+                    <!-- Anurod -->
+                    <div class="character">
+                        <span>Anurod</span>
+
+                        <div class="radio">
+                            <label>
+                  <input type="radio" name="anurod" value="resolve" checked/>
+                  Resolve
+                </label>
+
+                            <label>
+                  <input type="radio" name="anurod" value="reject" />
+                  Reject
+                </label>
+                        </div>
+
+                        <p id="msgAnurod">Value:-</p>
+                    </div>
+
+                    <!-- Akash -->
+                    <div class="character">
+                        <span>Akash</span>
+
+                        <div class="radio">
+                            <label>
+                  <input type="radio" name="akash" value="resolve" checked />
+                  Resolve
+                </label>
+
+                            <label>
+                  <input type="radio" name="akash" value="reject" />
+                  Reject
+                </label>
+                        </div>
+
+                        <p id="msgAkash">Value:-</p>
+                    </div>
+                </div>
+
+                <button type="button" id="submitBtn">Run Simulation</button>
+            </form>
+        </div>
+
+        <div class="promise-allSettled">
+            <form id="promiseForm">
+                <h4>Promise.all()</h4>
+                <div class="characters">
+                    <div class="character">
+                        <span>Hitesh</span>
+                        <div class="radio">
+                            <label>
+                  <input type="radio" name="hitesh" value="resolve"checked />Resolve
+                </label>
+                            <label>
+                  <input type="radio" name="hitesh" value="reject" />Reject
+                </label>
+                        </div>
+                        <p id="msgHitesh">Value:-</p>
+                    </div>
+
+                    <!-- Piyush -->
+                    <div class="character">
+                        <span>Piyush</span>
+
+                        <div class="radio">
+                            <label>
+                  <input type="radio" name="piyush" value="resolve" checked />
+                  Resolve
+                </label>
+
+                            <label>
+                  <input type="radio" name="piyush" value="reject" />
+                  Reject
+                </label>
+                        </div>
+
+                        <p id="msgPiyush">Value:-</p>
+                    </div>
+
+                    <!-- Anurod -->
+                    <div class="character">
+                        <span>Anurod</span>
+
+                        <div class="radio">
+                            <label>
+                  <input type="radio" name="anurod" value="resolve" checked/>
+                  Resolve
+                </label>
+
+                            <label>
+                  <input type="radio" name="anurod" value="reject" />
+                  Reject
+                </label>
+                        </div>
+
+                        <p id="msgAnurod">Value:-</p>
+                    </div>
+
+                    <!-- Akash -->
+                    <div class="character">
+                        <span>Akash</span>
+
+                        <div class="radio">
+                            <label>
+                  <input type="radio" name="akash" value="resolve" checked />
+                  Resolve
+                </label>
+
+                            <label>
+                  <input type="radio" name="akash" value="reject" />
+                  Reject
+                </label>
+                        </div>
+
+                        <p id="msgAkash">Value:-</p>
+                    </div>
+                </div>
+
+                <button type="button" id="submitBtn">Run Simulation</button>
+            </form>
+        </div>
+    </main>
+</body>
+
+</html>
