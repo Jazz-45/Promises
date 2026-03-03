@@ -6,332 +6,430 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>JS Concurrency Visulaizer</title>
     <link rel="stylesheet" href="style.css" />
-    <script src="script.js"></script>
+    <script src="script.js" defer></script>
 </head>
 
 <body>
-    <!-- <header class="selector">
-        <div><button>.all</button></div>
-        <div><button>.any</button></div>
-        <div><button>.race</button></div>
-        <div><button>.allSettled</button></div>
-    </header> -->
     <main>
-        <div class="promise-all">
-            <form id="promiseForm">
-                <h4>Promise.all()</h4>
+        <!-- ================= Promise.all ================= -->
+        <section class="promise-block" id="allBlock">
+            <h3>Promise.all()</h3>
+            <div class="method-info">
+                <ul>
+                    <li>Waits for all promises to resolve.</li>
+                    <li>If any promise rejects, it fails immediately.</li>
+                    <li>Returns an array of resolved values (in input order).</li>
+                    <li>Short-circuits on first rejection.</li>
+                </ul>
+            </div>
+
+            <form id="all-form" class="promiseForm" data-method="all">
                 <div class="characters">
                     <div class="character">
                         <span>Hitesh</span>
-                        <div class="radio">
-                            <label>
-                  <input type="radio" name="hitesh" value="resolve"checked />Resolve
-                </label>
-                            <label>
-                  <input type="radio" name="hitesh" value="reject" />Reject
-                </label>
-                        </div>
-                        <p id="msgHitesh">Value:-</p>
+
+                        <label><input type="radio" name="all-hitesh" value="resolve" checked/>Resolve</label>
+                        <label><input type="radio" name="all-hitesh" value="reject" />Reject</label>
+
+                        <br/>
+                        <label>Delay:</label>
+                        <select name="all-hitesh-delay" class="raceDelay" id="all-hitesh-delay">
+                <option value="1">1 sec</option>
+                <option value="2">2 sec</option>
+                <option value="3">3 sec</option>
+                <option value="4">4 sec</option>
+              </select>
+
+                        <p>Value:- <span id="all-msgHitesh"></span></p>
                     </div>
 
-                    <!-- Piyush -->
                     <div class="character">
                         <span>Piyush</span>
 
-                        <div class="radio">
-                            <label>
-                  <input type="radio" name="piyush" value="resolve" checked />
-                  Resolve
-                </label>
+                        <label><input type="radio" name="all-piyush" value="resolve" checked/>Resolve</label>
+                        <label><input type="radio" name="all-piyush" value="reject"/>Reject</label>
 
-                            <label>
-                  <input type="radio" name="piyush" value="reject" />
-                  Reject
-                </label>
-                        </div>
+                        <br/>
+                        <label>Delay:</label>
+                        <select name="all-akash-delay" class="raceDelay" id="all-piyush-delay">
+                <option value="1">1 sec</option>
+                <option value="2">2 sec</option>
+                <option value="3">3 sec</option>
+                <option value="4">4 sec</option>
+              </select>
 
-                        <p id="msgPiyush">Value:-</p>
+                        <p>Value:- <span id="all-msgPiyush"></span></p>
                     </div>
 
-                    <!-- Anurod -->
                     <div class="character">
-                        <span>Anurod</span>
+                        <span>Anirudh</span>
 
-                        <div class="radio">
-                            <label>
-                  <input type="radio" name="anurod" value="resolve" checked/>
-                  Resolve
-                </label>
+                        <label><input type="radio" name="all-anirudh" value="resolve" checked/>Resolve</label>
+                        <label><input type="radio" name="all-anirudh" value="reject"/>Reject</label>
 
-                            <label>
-                  <input type="radio" name="anurod" value="reject" />
-                  Reject
-                </label>
-                        </div>
+                        <br/>
+                        <label>Delay:</label>
 
-                        <p id="msgAnurod">Value:-</p>
+                        <select name="all-anirudh-delay" class="raceDelay" id="all-anirudh-delay">
+                <option value="1">1 sec</option>
+                <option value="2">2 sec</option>
+                <option value="3">3 sec</option>
+                <option value="4">4 sec</option>
+              </select>
+
+                        <p>Value:- <span id="all-msgAnirudh"></span></p>
                     </div>
 
-                    <!-- Akash -->
                     <div class="character">
                         <span>Akash</span>
 
-                        <div class="radio">
-                            <label>
-                  <input type="radio" name="akash" value="resolve" checked />
-                  Resolve
-                </label>
+                        <label><input type="radio" name="all-akash" value="resolve" checked />Resolve</label>
+                        <label><input type="radio" name="all-akash" value="reject" />Reject</label>
 
-                            <label>
-                  <input type="radio" name="akash" value="reject" />
-                  Reject
-                </label>
-                        </div>
+                        <br/>
 
-                        <p id="msgAkash">Value:-</p>
+                        <label>Delay:</label>
+
+                        <select name="all-akash-delay" class="raceDelay" id="all-akash-delay">
+                <option value="1">1 sec</option>
+                <option value="2">2 sec</option>
+                <option value="3">3 sec</option>
+                <option value="4">4 sec</option>
+              </select>
+
+                        <p>Value:- <span id="all-msgAkash"></span></p>
                     </div>
                 </div>
 
-                <button type="button" id="submitBtn">Run Simulation</button>
+                <button id="all-form-btn" type="button" class="runBtn">Run Simulation</button>
             </form>
-        </div>
 
-        <div class="promise-any">
-            <form id="promiseForm">
-                <h4>Promise.all()</h4>
+            <div class="resultBox">
+                <h4>Combined Promise Result</h4>
+                <p>Status: <span id="all-status"></span></p>
+                <p>Value: <span id="all-value"></span></p>
+            </div>
+        </section>
+
+        <!-- ================= Promise.any ================= -->
+
+        <section class="promise-block" id="anyBlock">
+            <h3>Promise.any()</h3>
+            <div class="method-info">
+                <ul>
+                    <li>Resolves as soon as the first promise resolves.</li>
+                    <li>Ignores rejected promises until all reject.</li>
+                    <li>If all promises reject, it throws an AggregateError.</li>
+                    <li>Returns the first successful value.</li>
+                </ul>
+            </div>
+
+            <form id="any-form" class="promiseForm" data-method="any">
                 <div class="characters">
                     <div class="character">
                         <span>Hitesh</span>
-                        <div class="radio">
-                            <label>
-                  <input type="radio" name="hitesh" value="resolve"checked />Resolve
-                </label>
-                            <label>
-                  <input type="radio" name="hitesh" value="reject" />Reject
-                </label>
-                        </div>
-                        <p id="msgHitesh">Value:-</p>
+
+                        <label><input type="radio" name="any-hitesh" value="resolve" checked />Resolve</label>
+                        <label><input type="radio" name="any-hitesh" value="reject" />Reject</label>
+
+                        <br/>
+
+                        <label>Delay:</label>
+
+                        <select name="all-akash-delay" class="raceDelay" id="any-hitesh-delay">
+                <option value="1">1 sec</option>
+                <option value="2">2 sec</option>
+                <option value="3">3 sec</option>
+                <option value="4">4 sec</option>
+              </select>
+
+                        <p>Value:- <span id="any-msgHitesh"></span></p>
                     </div>
 
-                    <!-- Piyush -->
                     <div class="character">
                         <span>Piyush</span>
 
-                        <div class="radio">
-                            <label>
-                  <input type="radio" name="piyush" value="resolve" checked />
-                  Resolve
-                </label>
+                        <label><input type="radio" name="any-piyush" value="resolve" checked />Resolve</label>
+                        <label><input type="radio" name="any-piyush" value="reject"/>Reject</label>
 
-                            <label>
-                  <input type="radio" name="piyush" value="reject" />
-                  Reject
-                </label>
-                        </div>
+                        <br/>
 
-                        <p id="msgPiyush">Value:-</p>
+                        <label>Delay:</label>
+
+                        <select name="all-akash-delay" class="raceDelay" id="any-piyush-delay">
+                <option value="1">1 sec</option>
+                <option value="2">2 sec</option>
+                <option value="3">3 sec</option>
+                <option value="4">4 sec</option>
+              </select>
+
+                        <p>Value:- <span id="any-msgPiyush"></span></p>
                     </div>
 
-                    <!-- Anurod -->
                     <div class="character">
-                        <span>Anurod</span>
+                        <span>Anirudh</span>
 
-                        <div class="radio">
-                            <label>
-                  <input type="radio" name="anurod" value="resolve" checked/>
-                  Resolve
-                </label>
+                        <label><input type="radio" name="any-anirudh" value="resolve" checked />Resolve</label>
+                        <label><input type="radio" name="any-anirudh" value="reject" />Reject</label>
 
-                            <label>
-                  <input type="radio" name="anurod" value="reject" />
-                  Reject
-                </label>
-                        </div>
+                        <br/>
 
-                        <p id="msgAnurod">Value:-</p>
+                        <label>Delay:</label>
+
+                        <select name="all-akash-delay" class="raceDelay" id="any-anirudh-delay">
+                <option value="1">1 sec</option>
+                <option value="2">2 sec</option>
+                <option value="3">3 sec</option>
+                <option value="4">4 sec</option>
+              </select>
+
+                        <p>Value:- <span id="any-msgAnirudh"></span></p>
                     </div>
 
-                    <!-- Akash -->
                     <div class="character">
                         <span>Akash</span>
 
-                        <div class="radio">
-                            <label>
-                  <input type="radio" name="akash" value="resolve" checked />
-                  Resolve
-                </label>
+                        <label><input type="radio" name="any-akash" value="resolve" checked />Resolve</label>
+                        <label><input type="radio" name="any-akash" value="reject" />Reject</label>
 
-                            <label>
-                  <input type="radio" name="akash" value="reject" />
-                  Reject
-                </label>
-                        </div>
+                        <br/>
 
-                        <p id="msgAkash">Value:-</p>
+                        <label>Delay:</label>
+
+                        <select name="all-akash-delay" class="raceDelay" id="any-akash-delay">
+                <option value="1">1 sec</option>
+                <option value="2">2 sec</option>
+                <option value="3">3 sec</option>
+                <option value="4">4 sec</option>
+              </select>
+
+                        <p>Value:- <span id="any-msgAkash"></span></p>
                     </div>
                 </div>
 
-                <button type="button" id="submitBtn">Run Simulation</button>
+                <button id="any-form-btn" type="button" class="runBtn">Run Simulation</button>
             </form>
-        </div>
 
-        <div class="promise-race">
-            <form id="promiseForm">
-                <h4>Promise.all()</h4>
+            <div class="resultBox">
+                <h4>Combined Promise Result</h4>
+                <p>Status: <span id="any-status"></span></p>
+                <p>Value: <span id="any-value"></span></p>
+            </div>
+        </section>
+
+        <!-- ================= Promise.race ================= -->
+
+        <section class="promise-block" id="raceBlock">
+            <h3>Promise.race()</h3>
+            <div class="method-info">
+                <ul>
+                    <li>Settles as soon as the first promise settles.</li>
+                    <li>Returns the first resolved or rejected result.</li>
+                    <li>Does not wait for other promises.</li>
+                    <li>Outcome depends purely on timing.</li>
+                </ul>
+            </div>
+
+            <form id="race-form" class="promiseForm" data-method="race">
+                <div class="characters">
+
+                    <div class="character">
+                        <span>Hitesh</span>
+
+                        <label><input type="radio" name="race-hitesh" value="resolve" checked/>Resolve</label>
+                        <label><input type="radio" name="race-hitesh" value="reject" />Reject</label>
+
+                        <br/>
+
+                        <label>Delay:</label>
+
+                        <select name="race-hitesh-delay" class="raceDelay" id="race-hitesh-delay">
+                <option value="1">1 sec</option>
+                <option value="2">2 sec</option>
+                <option value="3">3 sec</option>
+                <option value="4">4 sec</option>
+              </select>
+
+                        <p>Value:- <span id="race-msgHitesh"></span></p>
+                    </div>
+
+
+                    <div class="character">
+                        <span>Piyush</span>
+
+                        <label><input type="radio" name="race-piyush" value="resolve" checked/>Resolve</label>
+                        <label><input type="radio" name="race-piyush" value="reject" />Reject</label>
+                        <br/>
+
+                        <label>Delay:</label>
+
+                        <select name="race-piyush-delay" class="raceDelay" id="race-piyush-delay">
+                <option value="1">1 sec</option>
+                <option value="2">2 sec</option>
+                <option value="3">3 sec</option>
+                <option value="4">4 sec</option>
+              </select>
+
+                        <p>Value:- <span id="race-msgPiyush"></span></p>
+                    </div>
+
+                    <div class="character">
+                        <span>Anirudh</span>
+
+                        <label><input type="radio" name="race-anirudh" value="resolve" checked/>Resolve</label>
+                        <label><input type="radio" name="race-anirudh" value="reject" />Reject</label>
+                        <br/>
+
+                        <label>Delay:</label>
+
+                        <select name="race-anirudh-delay" class="raceDelay" id="race-anirudh-delay">
+                <option value="1">1 sec</option>
+                <option value="2">2 sec</option>
+                <option value="3">3 sec</option>
+                <option value="4">4 sec</option>
+              </select>
+
+                        <p>Value:- <span id="race-msgAnirudh"></span></p>
+                    </div>
+
+
+                    <div class="character">
+                        <span>Akash</span>
+
+                        <label><input type="radio" name="race-akash" value="resolve" checked />Resolve</label>
+                        <label><input type="radio" name="race-akash" value="reject" />Reject</label>
+                        <br/>
+
+                        <label>Delay:</label>
+                        <select name="race-akash-delay" class="raceDelay" id="race-akash-delay">
+                <option value="1">1 sec</option>
+                <option value="2">2 sec</option>
+                <option value="3">3 sec</option>
+                <option value="4">4 sec</option>
+              </select>
+
+                        <p>Value:- <span id="race-msgAkash"></span></p>
+                    </div>
+                </div>
+
+                <button id="race-form-btn" type="button" class="runBtn">Run Simulation</button>
+            </form>
+
+            <div class="resultBox">
+                <h4>Combined Promise Result</h4>
+
+                <p>
+                    Status:
+                    <span id="race-status"></span>
+                </p>
+
+                <p>
+                    Value:
+                    <span id="race-value"></span>
+                </p>
+            </div>
+        </section>
+        <!-- ================= Promise.allSettled ================= -->
+
+        <section class="promise-block" id="settledBlock">
+            <h3>Promise.allSettled()</h3>
+            <div class="method-info">
+                <ul>
+                    <li>Waits for all promises to settle.</li>
+                    <li>Never rejects.</li>
+                    <li>Returns an array of result objects.</li>
+                    <li>Each result contains: status + value/reason.</li>
+                </ul>
+            </div>
+
+            <form id="allSettled-form" class="promiseForm" data-method="allSettled">
                 <div class="characters">
                     <div class="character">
                         <span>Hitesh</span>
-                        <div class="radio">
-                            <label>
-                  <input type="radio" name="hitesh" value="resolve"checked />Resolve
-                </label>
-                            <label>
-                  <input type="radio" name="hitesh" value="reject" />Reject
-                </label>
-                        </div>
-                        <p id="msgHitesh">Value:-</p>
+
+                        <label><input type="radio" name="allSettled-hitesh" value="resolve" checked/>Resolve</label>
+                        <label><input type="radio" name="allSettled-hitesh" value="reject" />Reject</label>
+                        <br/>
+
+                        <label>Delay:</label>
+                        <select name="all-akash-delay" class="raceDelay" id="allSettled-hitesh-delay">
+                <option value="1">1 sec</option>
+                <option value="2">2 sec</option>
+                <option value="3">3 sec</option>
+                <option value="4">4 sec</option>
+              </select>
+
+                        <p>Value:- <span id="allSettled-msgHitesh"></span></p>
                     </div>
 
-                    <!-- Piyush -->
                     <div class="character">
                         <span>Piyush</span>
 
-                        <div class="radio">
-                            <label>
-                  <input type="radio" name="piyush" value="resolve" checked />
-                  Resolve
-                </label>
+                        <label><input type="radio" name="allSettled-piyush" value="resolve" checked/>Resolve</label>
+                        <label><input type="radio" name="allSettled-piyush" value="reject" />Reject</label>
+                        <br/>
 
-                            <label>
-                  <input type="radio" name="piyush" value="reject" />
-                  Reject
-                </label>
-                        </div>
+                        <label>Delay:</label>
+                        <select name="all-akash-delay" class="raceDelay" id="allSettled-piyush-delay">
+                <option value="1">1 sec</option>
+                <option value="2">2 sec</option>
+                <option value="3">3 sec</option>
+                <option value="4">4 sec</option>
+              </select>
 
-                        <p id="msgPiyush">Value:-</p>
+                        <p>Value:- <span id="allSettled-msgPiyush"></span></p>
                     </div>
 
-                    <!-- Anurod -->
                     <div class="character">
-                        <span>Anurod</span>
+                        <span>Anirudh</span>
 
-                        <div class="radio">
-                            <label>
-                  <input type="radio" name="anurod" value="resolve" checked/>
-                  Resolve
-                </label>
+                        <label><input type="radio" name="allSettled-anirudh" value="resolve" checked/>Resolve</label>
+                        <label><input type="radio" name="allSettled-anirudh" value="reject" />Reject</label>
+                        <br/>
 
-                            <label>
-                  <input type="radio" name="anurod" value="reject" />
-                  Reject
-                </label>
-                        </div>
+                        <label>Delay:</label>
 
-                        <p id="msgAnurod">Value:-</p>
+                        <select name="all-akash-delay" class="raceDelay" id="allSettled-anirudh-delay">
+                <option value="1">1 sec</option>
+                <option value="2">2 sec</option>
+                <option value="3">3 sec</option>
+                <option value="4">4 sec</option>
+              </select>
+
+                        <p>Value:- <span id="allSettled-msgAnirudh"></span></p>
                     </div>
 
-                    <!-- Akash -->
-                    <div class="character">
-                        <span>Akash</span>
-
-                        <div class="radio">
-                            <label>
-                  <input type="radio" name="akash" value="resolve" checked />
-                  Resolve
-                </label>
-
-                            <label>
-                  <input type="radio" name="akash" value="reject" />
-                  Reject
-                </label>
-                        </div>
-
-                        <p id="msgAkash">Value:-</p>
-                    </div>
-                </div>
-
-                <button type="button" id="submitBtn">Run Simulation</button>
-            </form>
-        </div>
-
-        <div class="promise-allSettled">
-            <form id="promiseForm">
-                <h4>Promise.all()</h4>
-                <div class="characters">
-                    <div class="character">
-                        <span>Hitesh</span>
-                        <div class="radio">
-                            <label>
-                  <input type="radio" name="hitesh" value="resolve"checked />Resolve
-                </label>
-                            <label>
-                  <input type="radio" name="hitesh" value="reject" />Reject
-                </label>
-                        </div>
-                        <p id="msgHitesh">Value:-</p>
-                    </div>
-
-                    <!-- Piyush -->
-                    <div class="character">
-                        <span>Piyush</span>
-
-                        <div class="radio">
-                            <label>
-                  <input type="radio" name="piyush" value="resolve" checked />
-                  Resolve
-                </label>
-
-                            <label>
-                  <input type="radio" name="piyush" value="reject" />
-                  Reject
-                </label>
-                        </div>
-
-                        <p id="msgPiyush">Value:-</p>
-                    </div>
-
-                    <!-- Anurod -->
-                    <div class="character">
-                        <span>Anurod</span>
-
-                        <div class="radio">
-                            <label>
-                  <input type="radio" name="anurod" value="resolve" checked/>
-                  Resolve
-                </label>
-
-                            <label>
-                  <input type="radio" name="anurod" value="reject" />
-                  Reject
-                </label>
-                        </div>
-
-                        <p id="msgAnurod">Value:-</p>
-                    </div>
-
-                    <!-- Akash -->
                     <div class="character">
                         <span>Akash</span>
 
-                        <div class="radio">
-                            <label>
-                  <input type="radio" name="akash" value="resolve" checked />
-                  Resolve
-                </label>
+                        <label><input type="radio" name="allSettled-akash" value="resolve" checked/>Resolve</label>
+                        <label><input type="radio" name="allSettled-akash" value="reject" />Reject</label>
 
-                            <label>
-                  <input type="radio" name="akash" value="reject" />
-                  Reject
-                </label>
-                        </div>
+                        <br/>
 
-                        <p id="msgAkash">Value:-</p>
+                        <label>Delay:</label>
+
+                        <select name="all-akash-delay" class="raceDelay" id="allSettled-akash-delay">
+                <option value="1">1 sec</option>
+                <option value="2">2 sec</option>
+                <option value="3">3 sec</option>
+                <option value="4">4 sec</option>
+              </select>
+
+                        <p>Value:- <span id="allSettled-msgAkash"></span></p>
                     </div>
                 </div>
 
-                <button type="button" id="submitBtn">Run Simulation</button>
+                <button id="allSettled-form-btn" type="button" class="runBtn">Run Simulation</button>
             </form>
-        </div>
+
+            <div class="resultBox">
+                <h4>Combined Promise Result</h4>
+                <p>Status: <span id="allSettled-status"></span></p>
+                <p>Value: <span id="allSettled-value"></span></p>
+            </div>
+
+        </section>
     </main>
 </body>
 
